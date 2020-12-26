@@ -16,6 +16,7 @@ function usage () {
   echo "  ubuntu-mate"
   echo "  ubuntu-studio"
   echo "  xubuntu"
+  echo "  i3-custom"
   echo
   echo "You can also pass the optional --oem option which will run a setup"
   echo "wizard on the next boot."
@@ -185,6 +186,10 @@ case "${DESKTOP_ENVIRONMENT}" in
     echo "[+] Specified Xubuntu desktop"
     DESKTOP_PACKAGES="xubuntu-desktop"
     shift;;
+  i3-custom)
+    echo "[+] Specified i3 desktop"
+    DESKTOP_PACKAGES="i3 lightdm network-manager-gnome network-manager-openvpn-gnome keepass2"
+    shift;;
   *)
     if [ -z "${DESKTOP_ENVIRONMENT}" ]; then
       echo "[!] ERROR: Please specifiy a desktop environment"
@@ -225,8 +230,8 @@ fi
 
 # Check if we're running 20.04
 CODENAME=$(lsb_release -cs)
-if [ "${CODENAME}" != "focal" ]; then
-  echo "[!] This script is only intended to run on Ubuntu 20.04."
+if [ "${CODENAME}" != "groovy" ]; then
+  echo "[!] This script is only intended to run on Ubuntu 20.10."
   exit 1
 fi
 
